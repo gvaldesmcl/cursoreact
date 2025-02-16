@@ -42,8 +42,6 @@ export default function ItemListContainerComponent(props) {
     arrayProductos = items;
 
   }else{
-
-    console.log('Solo '+ category);
     
     itemFiltrados = items.filter( (producto) =>  producto.category == category);
 
@@ -51,7 +49,7 @@ export default function ItemListContainerComponent(props) {
     
   }
 
-  // Setea el texto de inicio de la pagina
+  // Setea el texto de inicio
   let textoCategoria = '';
 
   if(!texto){
