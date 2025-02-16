@@ -3,14 +3,6 @@ import CartWidgetComponent from "../../common/CartWidget/CartWidget";
 
 export default function NavBarComponent(){
 
-
-    function muestraAlerta(texto){
-        console.log(texto);
-            alert('Clic desde '+texto.target.innerText);
-    }
-
-
-
     return(
 
 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,17 +17,17 @@ export default function NavBarComponent(){
           
           <Link className="nav-link active"  to="/">Home</Link>
         </li>
-        <li className="nav-item">
-          <a className="nav-link active" onClick={muestraAlerta} href="#">Laptops</a>
+        <li className="nav-item">          
+          <Link className="nav-link active" to="/category/laptops">Laptops</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" onClick={muestraAlerta} href="#">Tablets</a>
+        <Link className="nav-link active" to="/category/tablet">Tablets</Link>          
+        </li>
+        <li className="nav-item">          
+          <Link className="nav-link active" to="/category/gamer">Gamer</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" onClick={muestraAlerta} href="#">Gamer</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link active" onClick={muestraAlerta} href="#">Impresoras</a>
+        <Link className="nav-link active" to="/category/impresora">Impresoras</Link>          
         </li>
       </ul>
 

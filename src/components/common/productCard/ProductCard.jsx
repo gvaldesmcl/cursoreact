@@ -1,8 +1,9 @@
+import { Link } from "react-router";
 
 function ProductCard({id,title,price,stock,category,description,imageUrl}) {
   return (
     <div className="col">        
-        <div className="card" style={{width:"18rem;",height:"100%"}}>
+        <div className="card" style={{width:"5rem;",height:"100%"}}>
         <img src={imageUrl} className="card-img-top" alt="..."/>
         <div className="card-body">
             <h5 className="card-title">{title}</h5>
@@ -11,11 +12,11 @@ function ProductCard({id,title,price,stock,category,description,imageUrl}) {
             
         </div>
         <div className="card-footer">
-        <a href="#" className="btn btn-primary">Ver</a>
+          <Link className="btn btn-primary" to={`/product/${id}`}>Ver</Link>        
         </div>
         </div>
     </div>
   );
 }
-
+//<!--a href="#" className="btn btn-primary">Ver</a>
 export default ProductCard

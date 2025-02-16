@@ -2,6 +2,8 @@ import { useState } from "react";
 import { products } from "../../products.js";
 import { useEffect } from "react";
 import ProductCard from "../../common/productCard/ProductCard";
+import { useParams } from "react-router";
+
 export default function ItemListContainerComponent(props) {
   const [items, setItems] = useState([]);
 
@@ -29,12 +31,41 @@ export default function ItemListContainerComponent(props) {
 
   const { texto } = props;
 
+  const { category } = useParams();
+
+  let itemFiltrados = [];
+
+  let arrayProductos = [];
+
+  if(!category){
+
+    arrayProductos = items;
+
+  }else{
+
+    console.log('Solo '+ category);
+    
+    itemFiltrados = items.filter( (producto) =>  producto.category == category);
+
+    arrayProductos = itemFiltrados;
+    
+  }
+
+  // Setea el texto de inicio de la pagina
+  let textoCategoria = '';
+
+  if(!texto){
+    textoCategoria = 'Mostrando productos de tipo '+ category.toUpperCase();
+  }else{
+    textoCategoria = texto;
+  }
+
   return (
     <>
       <div className="card text-center" style={{ marginTop: "20px" }}>
-        <div className="card-header">Home</div>
+        <div className="card-header">Inicio</div>
         <div className="card-body">
-          <h5 className="card-title"> {texto}</h5>
+          <h5 className="card-title"> {textoCategoria}</h5>
           <p className="card-text">
             With supporting text below as a natural lead-in to additional
             content.
@@ -42,7 +73,7 @@ export default function ItemListContainerComponent(props) {
 
           <div className="container">
             <div className="row">
-              {items.map((item) => {
+              {arrayProductos.map((item) => {
                 return <ProductCard key={item.id} {...item} />;
               })}
             </div>

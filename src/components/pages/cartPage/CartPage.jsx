@@ -1,7 +1,11 @@
 
 function CartPage() {
   return (
-    <div>Mi Carrito</div>
+    <div className="card" style={{marginTop:"20px"}} >
+      <div className="card-body">
+        <h2>Mi Carrito</h2>
+      </div>
+  </div>
   ); 
 }
 
