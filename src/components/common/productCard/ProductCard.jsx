@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function ProductCard({id,title,price,stock,category,description,imageUrl}) {
   return (
-    <div className="col">        
+    <div className="col-3" style={{marginBottom:"20px"}}>        
         <div className="card" style={{width:"5rem;",height:"100%"}}>
         <img src={imageUrl} className="card-img-top" alt="..."/>
         <div className="card-body">
