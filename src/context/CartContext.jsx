@@ -6,7 +6,7 @@ const CartContextProvider = ({ children }) => {
   
   const [cart, setCart] = useState([]);
 
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useState(null);
 
   const addToCart = (product) => {
     
@@ -52,9 +52,22 @@ const CartContextProvider = ({ children }) => {
     return total;
   };
 
+  /*
+  const setCurrentOrder = (order) =>{
+
+    setOrder(order);
+
+  };
+
+  const resetCurrentOrder = () =>{
+
+    setOrder(null);
+
+  };*/
+
   let data = {
     cart,
-    order,
+    order,       
     addToCart,
     removeById,
     resetCart,

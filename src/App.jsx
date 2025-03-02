@@ -5,6 +5,8 @@ import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import CartPage from "./components/pages/cartPage/CartPage";
 import ItemDetail from "./components/pages/itemDetail/ItemDetail";
 import CartContextProvider from "./context/CartContext";
+import CheckoutPage from "./components/pages/checkoutPage/CheckoutPage";
+
 import { Toaster } from "sonner";
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
                 }
               />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />              
               <Route path="/product/:id" element={<ItemDetail />} />
               <Route
                 path="/category/:category"

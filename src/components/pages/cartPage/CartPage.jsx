@@ -1,118 +1,93 @@
 
 import { useContext } from "react";
-import { toast } from "sonner";
+import Swal from "sweetalert2";
 import { CartContext } from "../../../context/CartContext";
 import { Link } from "react-router";
 import CartRow from "../../common/cartRow/CartRow";
 
 function CartPage() {
 
-  const { resetCart, cart, removeById, getTotalAmount } = useContext(CartContext);
+  const { resetCart, cart,  getTotalAmount } = useContext(CartContext);
 
 let total = getTotalAmount();
 
-const resetCartWithAlert = () => {
-
+const emptyCart = () => {
+  
+  Swal.fire({
+    title: "Esta a punto de vaciar su carrito",
+    text: "¿Desea Continuar?",
+    showCancelButton: true,
+    confirmButtonText: "Si",    
+    cancelButtonText:  'Cancelar',
+    icon: "question"
+  }).then((result) => {
+    console.log(result);
+    if (result.isConfirmed) {
+      resetCart();
+      Swal.fire({
+        title: "Carrito vaciado con éxito",
+        showDenyButton: false,
+        showCancelButton: false,
+        confirmButtonText: "Aceptar",
+        icon: "success",
+      });
+    }
+  });
 };
 
 
 return (
   <>
-  <form>
-    <div className="container py-5">
-      <h1 className="mb-5">Mi Carrito</h1>
-      <div className="row">
-        <div className="col-lg-8">
-          <div className="card mb-4">
-            <div className="card-body">
-              {cart.length === 0 && <h3>Su carro esta vacio ...</h3>}
-              {cart.length > 0 &&
-                cart.map((articulo) => {
-                  return <CartRow key={articulo.id} {...articulo}></CartRow>;
-                })}
-            </div>
-          </div>
-        </div>
-        
-        <div className="col-lg-4">
-          <div className="card cart-summary">
-            <div className="card-body">
-              <h5>Datos de Comprador</h5>
-              <div className="mb-3">
-                <label className="form-label">Nombre</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="txtNombre"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Correo Electrónico</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="name@example.com"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Teléfono</label>
-                <input
-                  type="phone"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="+59955555555"
-                  required
-                />
+    <form>
+      <div className="container py-5">
+        <h1 className="mb-5">Mi Carrito</h1>
+        <div className="row">
+          <div className="col-lg-8">
+            <div className="card mb-4">
+              <div className="card-body">
+                {cart.length === 0 && <h3>Su carro esta vacio ...</h3>}
+                {cart.length > 0 &&
+                  cart.map((articulo) => {
+                    return <CartRow key={articulo.id} {...articulo}></CartRow>;
+                  })}
               </div>
             </div>
           </div>
-          <hr></hr>
-          <div className="card cart-summary">
-            <div className="card-body">
-              <div className="d-flex justify-content-between mb-3">
-                <span>Subtotal</span>
-                <span>
-                  {new Intl.NumberFormat("es-CL", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(total)}
-                </span>
-              </div>
 
-              <div className="d-flex justify-content-between mb-3">
-                <span>Impuesto</span>
-                <span>US$ 0</span>
+          <div className="col-lg-4">
+            <div className="card cart-summary">
+              <div className="card-body">
+                <div className="d-flex justify-content-between mb-4">
+                  <strong>Total Carrito</strong>
+                  <strong>
+                    {new Intl.NumberFormat("es-CL", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(total)}
+                  </strong>
+                </div>
+                {cart.length === 0 ? (
+                  <button className="btn btn-primary w-100" disabled>
+                    Checkout
+                  </button>
+                ) : (
+                  <Link className="btn btn-primary w-100" to={"/checkout"}>
+                    Procesar Pedido
+                  </Link>
+                )}
               </div>
-              <hr></hr>
-              <div className="d-flex justify-content-between mb-4">
-                <strong>Total a Pagar</strong>
-                <strong>
-                  {new Intl.NumberFormat("es-CL", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(total)}
-                </strong>
-              </div>
-              {cart.length === 0 ? (
-                <button className="btn btn-primary w-100" disabled>
-                  Checkout
-                </button>
-              ) : (
-                <button type="submit" className="btn btn-primary w-100">Checkout</button>
-              )}
             </div>
           </div>
         </div>
+        <div className="text-start mb-4">
+          <button type="button" className="btn btn-secondary" onClick={emptyCart}><i className="bi bi-trash" ></i> Vaciar Carrito</button>
+
       </div>
-    </div>
+      </div>
+  
     </form>
   </>
 );
-
-
 /*
 return (
   <div>

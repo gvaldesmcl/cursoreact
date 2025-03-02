@@ -33,16 +33,7 @@ function CartRow({id,title,price,stock,category,description,imageUrl,quantity}) 
           </div>
         </div>
         <div className="col-md-2 text-end">
-          <p className="fw-bold">{new Intl.NumberFormat("es-CL", { style: "currency", currency: "USD" }).format(price*quantity)}</p>
-          <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => {
-
-                removeById(id);
-
-                toast.info("Producto "+title+" eliminado del carrito")
-
-              }}>
-            <i className="bi bi-trash"></i>
-          </button>
+          <p className="fw-bold">{new Intl.NumberFormat("es-CL", { style: "currency", currency: "USD" }).format(price*quantity)}</p>          
         </div>
       </div>
       <hr></hr>
