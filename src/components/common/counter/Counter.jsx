@@ -30,8 +30,6 @@ const Counter = ({ item }) => {
     toast.success("Producto agregado a carrito", { duration: 5000, closeButton: true });
   };
 
-  console.log(cart);
-
   return (
     <div>      
       <div className="row text-center">

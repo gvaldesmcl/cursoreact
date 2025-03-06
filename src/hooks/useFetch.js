@@ -8,14 +8,9 @@ export const useFetch = (endPoint) =>{
 
         const getData = fetch(endPoint);
 
-        console.log(endPoint);
-
         getData
         .then((res)=> res.json())
         .then((res)=> setData(res))
-        .catch((err) => console.log(err));
-
-
 
     },[]);
 

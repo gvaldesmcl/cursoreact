@@ -20,8 +20,7 @@ const emptyCart = () => {
     confirmButtonText: "Si",    
     cancelButtonText:  'Cancelar',
     icon: "question"
-  }).then((result) => {
-    console.log(result);
+  }).then((result) => {    
     if (result.isConfirmed) {
       resetCart();
       Swal.fire({

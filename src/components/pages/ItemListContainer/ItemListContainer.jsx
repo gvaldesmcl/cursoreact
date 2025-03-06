@@ -1,53 +1,41 @@
 import { useState } from "react";
-import { products } from "../../products.js";
 import { useEffect } from "react";
 import ProductCard from "../../common/productCard/ProductCard";
 import { useParams } from "react-router";
+import { db } from "../../../firebaseConfig";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ItemListContainerComponent(props) {
+
   const [items, setItems] = useState([]);
-
-  //cloudinary.com
-
-  useEffect(() => {
-    const getProd = new Promise((resolve, reject) => {
-      let permiso = true;
-
-      if (permiso) {
-        resolve(products);
-      } else {
-        reject({ status: 400, message: "algo salio mal" });
-      }
-    });
-
-    getProd
-      .then((respuesta) => {
-        setItems(respuesta);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   const { texto } = props;
 
-  const { category } = useParams();
+  const { category } = useParams();  
 
-  let itemFiltrados = [];
+  //cloudinary.com
+  useEffect(() => {
+    const coleccionDeProductos = collection(db, "products");
+    let consulta = coleccionDeProductos;
 
-  let arrayProductos = [];
+    if (category) {
+      const coleccionFiltrada = query(
+        coleccionDeProductos,
+        where("category", "==", category)
+      );
+      consulta = coleccionFiltrada;
+    }
 
-  if(!category){
+    const getProducts = getDocs(consulta);
 
-    arrayProductos = items;
-
-  }else{
-    
-    itemFiltrados = items.filter( (producto) =>  producto.category == category);
-
-    arrayProductos = itemFiltrados;
-    
-  }
+    getProducts.then((res) => {
+      let newArray = res.docs.map((elemento) => {
+        return { id: elemento.id, ...elemento.data() };
+      });
+      setItems(newArray);
+    });
+  }, [category]);  
 
   // Setea el texto de inicio
   let textoCategoria = '';
@@ -69,13 +57,21 @@ export default function ItemListContainerComponent(props) {
             content.
           </p>
 
-          <div className="container">
-            <div className="row">
-              {arrayProductos.map((item) => {
-                return <ProductCard key={item.id} {...item} />;
-              })}
-            </div>
-          </div>
+          {items.length === 0 ? (
+        <CircularProgress />
+      ) : (
+        <div className="container">
+        <div className="row">
+          {items.map((item) => {
+            return <ProductCard key={item.id} {...item} />;
+          })}
+        </div>
+      </div>
+      )}
+
+
+
+
         </div>
       </div>
     </>

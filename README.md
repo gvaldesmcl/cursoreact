@@ -1,8 +1,26 @@
-# React + Vite
+# Proyecto e-Commerce 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![image](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-Currently, two official plugins are available:
+Este es un proyecto generado con Angular. Su función es demostrar de modo sencillo algunas de las capacidades de Angular JS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Este proyecto además incluye:
+- Uso de Firebase (Firestone) como motor de base de datos.
+- Bootstrap 5.0
+- Material UI
+- Muchas horas de desarrollo 🥵
+
+## Ejecutar 🏃
+
+Este programa requiere tener instalado NodeJS +16 o superior
+
+Para ejecutar el programa corra el siguiente comando desde la consola de su ordenador:
+
+```bash
+npm run dev
+```
+
+## Desarrollo🛠️
+
+Desarrollado por Gustavo Valdés para curso de Coderhouse "React JS" Comisión 59890.
